@@ -4,9 +4,22 @@ from game_result import GameResult
 
 
 class Game:
-    def guess(self, guessNumber) -> GameResult:
+    def __init__(self):
+        self._question = ""
+
+    @property
+    def question(self):
+        raise AttributeError("읽을 수 없음")
+
+    @question.setter
+    def question(self, value):
+        self._question = value
+
+    def guess(self, guessNumber) -> GameResult or None:
         self.assert_illigal_value(guessNumber)
-        return GameResult(True,3,0)
+        if guessNumber == self._question :
+            return GameResult(True,3,0)
+        return None
 
     def assert_illigal_value(self, guessNumber):
         if guessNumber is None:
