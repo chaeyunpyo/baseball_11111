@@ -27,3 +27,7 @@ def test_return_solved_result_if_unmatched_number(game):
     game.question = "123"
     assert_matced_number(game.guess("456"), False, 0, 0)
 
+def test_return_solved_result_if_2strike_0ball_number(game):
+    game.question = "123"
+    assert_matced_number(game.guess("124"), False, 2, 0)
+
