@@ -5,12 +5,16 @@ from game import Game
 def game():
     return Game()
 
-def test_exception_when_input_is_none(game):
-    with pytest.raises(TypeError):
-        game.guess(None)
+def test_exception_when_invalid_input(game):
+    assert_illegal_argument(game, None)
+    assert_illegal_argument(game, "12")
 
 
-def test_exception_when_input_length_is_unmatched(game):
-    with pytest.raises(TypeError):
-        game.guess("12")
-        
+
+def assert_illegal_argument(game: Game, guessnumbers: str):
+    try:
+        game.guess(guessnumbers)
+        pytest.fail()
+    except TypeError:
+        pass
+
