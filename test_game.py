@@ -13,3 +13,11 @@ def assert_illegal_argument(game: Game, guessnumbers: str):
     with pytest.raises(TypeError):
         game.guess(guessnumbers)
 
+def test_return_solved_result_if_matched_number(game):
+    game.question = "123"
+    result = game.guess("123")
+
+    assert result is not None
+    assert result.solved == True
+    assert result.strikes == 3
+    assert result.balls == 0

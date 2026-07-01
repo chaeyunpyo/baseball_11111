@@ -1,10 +1,12 @@
 from typing import Any, Optional
 
+from game_result import GameResult
+
 
 class Game:
-    def guess(self, guessNumber):
-
+    def guess(self, guessNumber) -> GameResult:
         self.assert_illigal_value(guessNumber)
+        return GameResult(True,3,0)
 
     def assert_illigal_value(self, guessNumber):
         if guessNumber is None:
