@@ -31,3 +31,7 @@ def test_return_solved_result_if_2strike_0ball_number(game):
     game.question = "123"
     assert_matced_number(game.guess("124"), False, 2, 0)
 
+def test_return_solved_result_if_1strike_2ball_number(game):
+    game.question = "123"
+    assert_matced_number(game.guess("132"), False, 1, 2)
+
