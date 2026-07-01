@@ -15,24 +15,29 @@ class Game:
     def question(self, value):
         self._question = value
 
-    def guess(self, guessNumber) -> GameResult:
-        self.assert_illigal_value(guessNumber)
+    def calc_game_score(self, guessNumber):
 
-        if guessNumber == self._question :
-            return GameResult(True,3,0)
-
+        result = False
         strike = 0
         ball = 0
 
         for idx, num in enumerate(self._question):
             for guess_idx, guess_num in enumerate(guessNumber):
-                if num == guess_num :
+                if num == guess_num:
                     if idx == guess_idx:
                         strike += 1
-                    else :
+                    else:
                         ball += 1
 
-        return GameResult(False, strike, ball)
+        if strike == 3: result = True
+
+        return result, strike, ball
+
+
+    def guess(self, guessNumber) -> GameResult:
+        self.assert_illigal_value(guessNumber)
+        result, strike, ball = self.calc_game_score(guessNumber)
+        return GameResult(result, strike, ball)
 
     def assert_illigal_value(self, guessNumber):
         if guessNumber is None:
