@@ -9,25 +9,21 @@ def game():
 def test_exception_when_invalid_input(game, value_input):
     assert_illegal_argument(game, value_input)
 
+def assert_matced_number(result, solved: bool, strikes: int, balls: int):
+    assert result is not None
+    assert result.solved == solved
+    assert result.strikes == strikes
+    assert result.balls == balls
+
 def assert_illegal_argument(game: Game, guessnumbers: str):
     with pytest.raises(TypeError):
         game.guess(guessnumbers)
 
 def test_return_solved_result_if_matched_number(game):
     game.question = "123"
-    result = game.guess("123")
-
-    assert result is not None
-    assert result.solved == True
-    assert result.strikes == 3
-    assert result.balls == 0
+    assert_matced_number(game.guess("123"), True, 3, 0)
 
 def test_return_solved_result_if_unmatched_number(game):
     game.question = "123"
-    result = game.guess("456")
-
-    assert result is not None
-    assert result.solved == False
-    assert result.strikes == 0
-    assert result.balls == 0
+    assert_matced_number(game.guess("456"), False, 0, 0)
 
